@@ -8,14 +8,17 @@ const getCharacters = page => dispatch => getCharacter({ page })
     }),
   );
 
-const getFilterCharacters = ({ page, name }) => dispatch => getCharacter({
+const filterCharacters = ({ page, name, status }) => dispatch => getCharacter({
   page,
   name,
+  status,
 }).then(
-  characters => dispatch({
-    type: 'GET_CHARACTERS',
-    payload: characters.results,
-  }),
-);
+  characters => {
+    dispatch({
+      type: 'FILTER_CHARACTERS',
+      payload: characters.results,
+    });
+  },
+).catch(e => console.error(e));
 
-export { getCharacters, getFilterCharacters };
+export { getCharacters, filterCharacters };

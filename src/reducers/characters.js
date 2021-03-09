@@ -3,6 +3,9 @@ const characterReducer = (state = [], action) => {
     case 'GET_CHARACTERS':
       return [...action.payload];
 
+    case 'FILTER_CHARACTERS':
+      return [...action.payload];
+
     default:
       return state;
   }

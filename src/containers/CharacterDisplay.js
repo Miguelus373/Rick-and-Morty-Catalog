@@ -1,30 +1,49 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import getCharacters from '../actions/index';
+import { getCharacters, filterCharacters } from '../actions/index';
 import CharacterCard from '../components/CharacterCard';
+import Filter from './Filter';
 
 class CharacterDisplay extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      page: 1,
+      page: 0,
+      name: '',
+      status: '',
     };
     this.handlePageChange = this.handlePageChange.bind(this);
+    this.handleFilterChange = this.handleFilterChange.bind(this);
+  }
+
+  handleFilterChange(e) {
+    const { filterCharacters } = this.props;
+    this.setState(
+      { [e.target.name]: e.target.value, page: 1 },
+      () => filterCharacters(this.state),
+    );
   }
 
   handlePageChange(e) {
-    const { getCharacters } = this.props;
+    const { getCharacters, filterCharacters } = this.props;
     const page = e.target.innerHTML === 'Next' ? 1 : -1;
 
-    this.setState(prev => {
-      getCharacters(prev.page + page);
-      return { page: prev.page + page };
-    });
+    this.setState(
+      prev => ({ page: prev.page + page }),
+      () => {
+        if (Object.values(this.state).some(state => state !== '')) {
+          filterCharacters(this.state);
+        } else {
+          const { page } = this.state;
+          getCharacters({ page });
+        }
+      },
+    );
   }
 
   render() {
-    const { page } = this.state;
+    const { page, name } = this.state;
     const { characters } = this.props;
 
     return (
@@ -33,6 +52,18 @@ class CharacterDisplay extends React.Component {
           page
           {page}
         </p>
+        <Filter
+          name={name}
+          handleChange={this.handleFilterChange}
+          handleSubmit={this.handleFilterSubmit}
+        />
+        <button type="button" onClick={e => this.handlePageChange(e)}>
+          Previous
+        </button>
+        <button type="button" onClick={e => this.handlePageChange(e)}>
+          Next
+        </button>
+        <br />
         {characters.map(character => (
           <CharacterCard
             key={character.id}
@@ -41,13 +72,6 @@ class CharacterDisplay extends React.Component {
             image={character.image}
           />
         ))}
-        <br />
-        <button type="button" onClick={e => this.handlePageChange(e)}>
-          Previous
-        </button>
-        <button type="button" onClick={e => this.handlePageChange(e)}>
-          Next
-        </button>
       </div>
     );
   }
@@ -56,6 +80,7 @@ class CharacterDisplay extends React.Component {
 CharacterDisplay.propTypes = {
   characters: PropTypes.arrayOf(PropTypes.object).isRequired,
   getCharacters: PropTypes.func.isRequired,
+  filterCharacters: PropTypes.func.isRequired,
 };
 
 const mapState = state => ({
@@ -64,6 +89,7 @@ const mapState = state => ({
 
 const mapDispatch = {
   getCharacters,
+  filterCharacters,
 };
 
 export default connect(mapState, mapDispatch)(CharacterDisplay);
