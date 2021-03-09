@@ -8,4 +8,14 @@ const getCharacters = page => dispatch => getCharacter({ page })
     }),
   );
 
-export { getCharacters as default };
+const getFilterCharacters = ({ page, name }) => dispatch => getCharacter({
+  page,
+  name,
+}).then(
+  characters => dispatch({
+    type: 'GET_CHARACTERS',
+    payload: characters.results,
+  }),
+);
+
+export { getCharacters, getFilterCharacters };

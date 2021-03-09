@@ -1,11 +1,15 @@
 import '../assets/App.css';
+import { Switch, Route } from 'react-router-dom';
 import CharacterDisplay from '../containers/CharacterDisplay';
 
 function App() {
   return (
-    <div className="App">
-      <CharacterDisplay />
-    </div>
+    <Switch>
+      <div className="App">
+        {/* <Route path="/character/" component={CharacterDetails} /> */}
+        <Route path="/" component={CharacterDisplay} />
+      </div>
+    </Switch>
   );
 }
 

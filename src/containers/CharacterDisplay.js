@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import getCharacters from '../actions/index';
+import CharacterCard from '../components/CharacterCard';
 
 class CharacterDisplay extends React.Component {
   constructor(props) {
@@ -9,15 +10,16 @@ class CharacterDisplay extends React.Component {
     this.state = {
       page: 1,
     };
-    this.handleRequest = this.handleRequest.bind(this);
+    this.handlePageChange = this.handlePageChange.bind(this);
   }
 
-  handleRequest() {
+  handlePageChange(e) {
     const { getCharacters } = this.props;
+    const page = e.target.innerHTML === 'Next' ? 1 : -1;
 
     this.setState(prev => {
-      getCharacters(prev.page);
-      return { page: prev.page + 1 };
+      getCharacters(prev.page + page);
+      return { page: prev.page + page };
     });
   }
 
@@ -32,16 +34,19 @@ class CharacterDisplay extends React.Component {
           {page}
         </p>
         {characters.map(character => (
-          <span key={character.id}>
-            {character.name}
-            {' '}
-            |
-            {' '}
-          </span>
+          <CharacterCard
+            key={character.id}
+            name={character.name}
+            status={character.status}
+            image={character.image}
+          />
         ))}
         <br />
-        <button type="button" onClick={this.handleRequest}>
-          Show More
+        <button type="button" onClick={e => this.handlePageChange(e)}>
+          Previous
+        </button>
+        <button type="button" onClick={e => this.handlePageChange(e)}>
+          Next
         </button>
       </div>
     );
