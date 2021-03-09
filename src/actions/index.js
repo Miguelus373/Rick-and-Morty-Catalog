@@ -1,6 +1,11 @@
-const GET_CHARACTER = page => ({
-  type: 'GET_CHARACTERS',
-  payload: page,
-});
+import { getCharacter } from 'rickmortyapi';
 
-export { GET_CHARACTER as default };
+const getCharacters = page => dispatch => getCharacter({ page })
+  .then(
+    characters => dispatch({
+      type: 'GET_CHARACTERS',
+      payload: characters.results,
+    }),
+  );
+
+export { getCharacters as default };

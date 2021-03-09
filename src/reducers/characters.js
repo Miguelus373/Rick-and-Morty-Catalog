@@ -1,15 +1,11 @@
-import { getCharacter } from 'rickmortyapi';
+const characterReducer = (state = [], action) => {
+  switch (action.type) {
+    case 'GET_CHARACTERS':
+      return [...state, ...action.payload];
 
-const characterReducer = async (state = [], action) => {
-  if (action.type === 'GET_CHARACTERS') {
-    const nextPage = await getCharacter({
-      page: action.payload,
-    });
-
-    return [...state, ...nextPage.results];
+    default:
+      return state;
   }
-
-  return state;
 };
 
 export default characterReducer;
