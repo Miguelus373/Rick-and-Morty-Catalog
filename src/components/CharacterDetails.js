@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getSingleCharacter, useLocalCharacter } from '../actions/index';
+import styles from '../assets/details.module.css';
 
 const CharacterDetails = () => {
   let { id } = useParams();
@@ -25,12 +26,28 @@ const CharacterDetails = () => {
     } = details;
     return (
       <>
-        <img src={image} alt={name} />
-        <p>{name}</p>
-        <p>{status}</p>
-        <p>{species}</p>
-        <p>{type}</p>
-        <p>{location.name}</p>
+        <h1 className={styles.name}>{name}</h1>
+        <div className={styles.container}>
+          <img src={image} alt={name} className={styles.portrait} />
+          <div className={styles.info}>
+            <p className={styles.detail}>
+              <span>Status:</span>
+              <span>{status}</span>
+            </p>
+            <p className={styles.detail}>
+              <span>Species:</span>
+              <span>{species}</span>
+            </p>
+            <p className={styles.detail}>
+              <span>Type:</span>
+              <span>{type}</span>
+            </p>
+            <p className={styles.detail}>
+              <span>Location:</span>
+              <span>{location.name}</span>
+            </p>
+          </div>
+        </div>
       </>
     );
   }
