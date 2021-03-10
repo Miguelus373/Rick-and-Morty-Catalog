@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getSingleCharacter, useLocalCharacter } from '../actions/index';
 import styles from '../assets/details.module.css';
+import Arrow from '../assets/arrow.svg';
 
 const CharacterDetails = () => {
   let { id } = useParams();
@@ -28,6 +29,9 @@ const CharacterDetails = () => {
       <>
         <h1 className={styles.name}>{name}</h1>
         <div className={styles.container}>
+          <Link to="/">
+            <img src={Arrow} className={styles.backArrow} alt="Go Back" />
+          </Link>
           <img src={image} alt={name} className={styles.portrait} />
           <div className={styles.info}>
             <p className={styles.detail}>

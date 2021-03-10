@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { getCharacters, filterCharacters } from '../actions/index';
 import CharacterCard from '../components/CharacterCard';
 import Filter from '../components/Filter';
+import Arrow from '../assets/arrow.svg';
+import styles from '../assets/display.module.css';
 
 class CharacterDisplay extends React.Component {
   constructor(props) {
@@ -28,7 +30,7 @@ class CharacterDisplay extends React.Component {
 
   handlePageChange(e) {
     const { getCharacters, filterCharacters } = this.props;
-    const page = e.target.innerHTML === 'Next' ? 1 : -1;
+    const page = e.target.alt === 'Next' ? 1 : -1;
 
     this.setState(
       prev => ({ page: prev.page + page }),
@@ -48,7 +50,7 @@ class CharacterDisplay extends React.Component {
     const { characters } = this.props;
 
     return (
-      <div>
+      <>
         <p>
           page
           {page}
@@ -58,23 +60,24 @@ class CharacterDisplay extends React.Component {
           handleChange={this.handleFilterChange}
           handleSubmit={this.handleFilterSubmit}
         />
-        <button type="button" onClick={e => this.handlePageChange(e)}>
-          Previous
+        <button type="button" className={`${styles.btnPrev} ${styles.arrowBtn}`} onClick={e => this.handlePageChange(e)}>
+          <img src={Arrow} alt="Previous" className={styles.arrow} />
         </button>
-        <button type="button" onClick={e => this.handlePageChange(e)}>
-          Next
+        <button type="button" className={`${styles.btnNext} ${styles.arrowBtn}`} onClick={e => this.handlePageChange(e)}>
+          <img src={Arrow} alt="Next" className={`${styles.arrow} ${styles.next}`} />
         </button>
-        <br />
-        {characters.map(character => (
-          <Link to={`/character/${character.id}`} key={character.id}>
-            <CharacterCard
-              name={character.name}
-              status={character.status}
-              image={character.image}
-            />
-          </Link>
-        ))}
-      </div>
+        <div className={styles.container}>
+          {characters.map(character => (
+            <Link to={`/character/${character.id}`} key={character.id}>
+              <CharacterCard
+                name={character.name}
+                status={character.status}
+                image={character.image}
+              />
+            </Link>
+          ))}
+        </div>
+      </>
     );
   }
 }
