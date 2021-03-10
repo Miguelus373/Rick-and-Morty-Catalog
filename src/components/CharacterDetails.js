@@ -1,22 +1,28 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { getSingleCharacter } from '../actions/index';
+import { getSingleCharacter, useLocalCharacter } from '../actions/index';
 
 const CharacterDetails = () => {
-  const { id } = useParams();
+  let { id } = useParams();
+  id = parseInt(id, 10);
   const dispatch = useDispatch();
+  const localChr = useSelector(state => state.characters).find(chr => chr.id === id);
 
   useEffect(() => {
-    dispatch(getSingleCharacter(parseInt(id, 10)));
+    if (localChr) {
+      dispatch(useLocalCharacter(localChr));
+    } else {
+      dispatch(getSingleCharacter(id));
+    }
   }, []);
 
-  const character = useSelector(state => state.characterReducer)[0];
+  const details = useSelector(state => state.details);
 
-  if (character) {
+  if (details.name) {
     const {
       name, image, status, species, type, location,
-    } = character;
+    } = details;
     return (
       <>
         <img src={image} alt={name} />

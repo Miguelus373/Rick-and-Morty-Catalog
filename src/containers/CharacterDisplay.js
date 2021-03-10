@@ -86,7 +86,7 @@ CharacterDisplay.propTypes = {
 };
 
 const mapState = state => ({
-  characters: state.characterReducer,
+  characters: state.characters,
 });
 
 const mapDispatch = {

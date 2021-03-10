@@ -10,8 +10,8 @@ const Filter = ({ name, handleChange }) => (
         placeholder="Enter Character Name"
         onChange={handleChange}
       />
-      <select name="status" onChange={handleChange}>
-        <option disabled>Status</option>
+      <select defaultValue="status" name="status" onChange={handleChange}>
+        <option value="status" disabled>Status</option>
         <option>Alive</option>
         <option>Dead</option>
         <option>Unknown</option>

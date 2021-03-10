@@ -1,4 +1,4 @@
-const characterReducer = (state = [], action) => {
+const characters = (state = [], action) => {
   switch (action.type) {
     case 'GET_CHARACTERS':
       return [...action.payload];
@@ -6,12 +6,9 @@ const characterReducer = (state = [], action) => {
     case 'FILTER_CHARACTERS':
       return [...action.payload];
 
-    case 'GET_SINGLE_CHARACTER':
-      return [...action.payload];
-
     default:
       return state;
   }
 };
 
-export default characterReducer;
+export default characters;
