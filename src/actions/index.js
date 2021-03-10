@@ -19,6 +19,16 @@ const filterCharacters = ({ page, name, status }) => dispatch => getCharacter({
       payload: characters.results,
     });
   },
-).catch(e => console.error(e));
+);
 
-export { getCharacters, filterCharacters };
+const getSingleCharacter = id => dispatch => getCharacter(id)
+  .then(
+    character => {
+      dispatch({
+        type: 'GET_SINGLE_CHARACTER',
+        payload: [character],
+      });
+    },
+  );
+
+export { getCharacters, filterCharacters, getSingleCharacter };

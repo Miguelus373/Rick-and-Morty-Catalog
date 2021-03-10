@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { getCharacters, filterCharacters } from '../actions/index';
 import CharacterCard from '../components/CharacterCard';
-import Filter from './Filter';
+import Filter from '../components/Filter';
 
 class CharacterDisplay extends React.Component {
   constructor(props) {
@@ -65,12 +66,13 @@ class CharacterDisplay extends React.Component {
         </button>
         <br />
         {characters.map(character => (
-          <CharacterCard
-            key={character.id}
-            name={character.name}
-            status={character.status}
-            image={character.image}
-          />
+          <Link to={`/character/${character.id}`} key={character.id}>
+            <CharacterCard
+              name={character.name}
+              status={character.status}
+              image={character.image}
+            />
+          </Link>
         ))}
       </div>
     );

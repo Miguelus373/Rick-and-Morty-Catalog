@@ -1,15 +1,16 @@
 import '../assets/App.css';
 import { Switch, Route } from 'react-router-dom';
 import CharacterDisplay from '../containers/CharacterDisplay';
+import CharacterDetails from './CharacterDetails';
 
 function App() {
   return (
-    <Switch>
-      <div className="App">
-        {/* <Route path="/character/" component={CharacterDetails} /> */}
-        <Route path="/" component={CharacterDisplay} />
-      </div>
-    </Switch>
+    <div className="App">
+      <Switch>
+        <Route path="/character/:id" component={CharacterDetails} />
+        <Route exact path="/" component={CharacterDisplay} />
+      </Switch>
+    </div>
   );
 }
 

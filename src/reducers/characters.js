@@ -6,6 +6,9 @@ const characterReducer = (state = [], action) => {
     case 'FILTER_CHARACTERS':
       return [...action.payload];
 
+    case 'GET_SINGLE_CHARACTER':
+      return [...action.payload];
+
     default:
       return state;
   }
