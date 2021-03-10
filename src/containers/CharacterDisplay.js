@@ -46,15 +46,11 @@ class CharacterDisplay extends React.Component {
   }
 
   render() {
-    const { page, name } = this.state;
+    const { name } = this.state;
     const { characters } = this.props;
 
     return (
       <>
-        <p>
-          page
-          {page}
-        </p>
         <Filter
           name={name}
           handleChange={this.handleFilterChange}

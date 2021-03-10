@@ -1,0 +1,30 @@
+.container {
+  width: 45%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 3rem 0 0;
+}
+
+.filter {
+  margin: 0;
+  text-shadow: black 4px 4px 12px;
+}
+
+.input,
+.select {
+  border-radius: 10px;
+  font-size: 14px;
+  box-shadow: black 5px 5px 12px;
+}
+
+.input {
+  padding: 7px 14px;
+  width: 45%;
+}
+
+.select {
+  background-color: white;
+  width: 20%;
+  padding: 7px 10px;
+}

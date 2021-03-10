@@ -1,23 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from '../assets/filter.module.css';
 
 const Filter = ({ name, handleChange }) => (
-  <header>
-    <div>
-      <input
-        value={name}
-        name="name"
-        placeholder="Enter Character Name"
-        onChange={handleChange}
-      />
-      <select defaultValue="status" name="status" onChange={handleChange}>
-        <option value="status" disabled>Status</option>
-        <option>Alive</option>
-        <option>Dead</option>
-        <option>Unknown</option>
-      </select>
-    </div>
-  </header>
+  <div className={styles.container}>
+    <h4 className={styles.filter}>Add Filters:</h4>
+    <input
+      value={name}
+      name="name"
+      placeholder="Character Name"
+      onChange={handleChange}
+      className={styles.input}
+    />
+    <select
+      defaultValue="status"
+      name="status"
+      onChange={handleChange}
+      className={styles.select}
+    >
+      <option value="status" disabled>Status</option>
+      <option>Alive</option>
+      <option>Dead</option>
+      <option>Unknown</option>
+    </select>
+  </div>
 );
 
 Filter.propTypes = {
