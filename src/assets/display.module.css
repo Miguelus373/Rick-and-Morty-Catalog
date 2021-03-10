@@ -3,17 +3,16 @@
 .arrowBtn {
   border: none;
   background-color: transparent;
-  position: absolute;
+  position: fixed;
+  top: calc(50% - 2rem)
 }
 
 .btnNext {
   right: 2rem;
-  top: 50%
 }
 
 .btnPrev {
   left: 2rem;
-  top: 50%
 }
 
 .arrow {
@@ -33,6 +32,12 @@
   margin: 0 auto;
   justify-content: space-evenly;
   padding: 2rem;
+}
+
+.link {
+  width: 25%;
+  text-decoration: none;
+  margin: 1rem 0;
 }
 
 .arrowBtn:focus {

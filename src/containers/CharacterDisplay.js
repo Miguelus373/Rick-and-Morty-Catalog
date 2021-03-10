@@ -68,7 +68,7 @@ class CharacterDisplay extends React.Component {
         </button>
         <div className={styles.container}>
           {characters.map(character => (
-            <Link to={`/character/${character.id}`} key={character.id}>
+            <Link to={`/character/${character.id}`} key={character.id} className={styles.link}>
               <CharacterCard
                 name={character.name}
                 status={character.status}

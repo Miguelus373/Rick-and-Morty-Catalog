@@ -1,13 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from '../assets/card.module.css';
 
 const CharacterCard = ({ name, status, image }) => (
-  <div>
-    <img alt={name} src={image} />
-    <h3>{name}</h3>
-    <span>
-      {status}
-    </span>
+  <div className={`${styles.card} ${styles[status]}`}>
+    <img alt={name} src={image} className={styles.portrait} />
+    <h4 className={styles.name}>{name}</h4>
   </div>
 );
 
