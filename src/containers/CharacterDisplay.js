@@ -36,7 +36,6 @@ class CharacterDisplay extends React.Component {
   }
 
   render() {
-    // const { name } = this.props.filters;
     const { characters: { all }, filters: { name, page } } = this.props;
 
     return (
@@ -45,7 +44,6 @@ class CharacterDisplay extends React.Component {
         <Filter
           name={name}
           handleChange={this.handleFilterChange}
-          handleSubmit={this.handleFilterSubmit}
         />
         <button type="button" className={`${styles.btnPrev} ${styles.arrowBtn}`} onClick={e => this.handlePageChange(e)}>
           <img src={Arrow} alt="Previous" className={styles.arrow} />
