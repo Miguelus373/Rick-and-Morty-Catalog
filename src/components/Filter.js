@@ -19,6 +19,7 @@ const Filter = ({ name, handleChange }) => (
       className={styles.select}
     >
       <option value="status" disabled>Status</option>
+      <option value="">All</option>
       <option>Alive</option>
       <option>Dead</option>
       <option>Unknown</option>

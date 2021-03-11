@@ -31,11 +31,18 @@ const getSingleCharacter = id => dispatch => getCharacter(id)
     },
   ).catch(() => []);
 
+const setFilters = filters => ({
+  type: 'SET_FILTERS',
+  payload: filters,
+});
+
 const useLocalCharacter = character => ({
   type: 'USE_SINGLE_CHARACTER',
   payload: character,
 });
 
 export {
-  getCharacters, filterCharacters, getSingleCharacter, useLocalCharacter,
+  getCharacters, filterCharacters,
+  getSingleCharacter, useLocalCharacter,
+  setFilters,
 };
