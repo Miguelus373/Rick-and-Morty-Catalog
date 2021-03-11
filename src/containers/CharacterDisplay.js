@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { getCharacters, filterCharacters, setFilters } from '../actions/index';
+import { updateCharacters, setFilters } from '../actions/index';
 import CharacterCard from '../components/CharacterCard';
 import Filter from '../components/Filter';
 import Arrow from '../assets/arrow.svg';
@@ -16,31 +16,28 @@ class CharacterDisplay extends React.Component {
   }
 
   handleFilterChange(e) {
-    const { filterCharacters, setFilters, filters } = this.props;
+    const { updateCharacters, setFilters, filters } = this.props;
     const newFilters = { [e.target.name]: e.target.value, page: 1 };
 
     setFilters(newFilters);
-    filterCharacters({ ...filters, ...newFilters });
+    updateCharacters({ ...filters, ...newFilters });
   }
 
   handlePageChange(e) {
     const {
-      getCharacters, filterCharacters, filters, setFilters, filters: { page: current },
+      updateCharacters, filters, setFilters, filters: { page: current }, characters: { count },
     } = this.props;
     const page = e.target.alt === 'Next' ? current + 1 : current - 1;
 
-    if (Object.values(filters).some(state => state !== '')) {
-      filterCharacters({ ...filters, page });
-    } else {
-      getCharacters({ page });
+    if (page >= 1 && page <= count) {
+      setFilters({ page });
+      updateCharacters({ ...filters, page });
     }
-
-    setFilters({ page });
   }
 
   render() {
     // const { name } = this.props.filters;
-    const { characters, filters: { name, page } } = this.props;
+    const { characters: { all }, filters: { name, page } } = this.props;
 
     return (
       <>
@@ -57,7 +54,7 @@ class CharacterDisplay extends React.Component {
           <img src={Arrow} alt="Next" className={`${styles.arrow} ${styles.next}`} />
         </button>
         <div className={styles.container}>
-          {characters.map(character => (
+          {all.map(character => (
             <Link to={`/character/${character.id}`} key={character.id} className={styles.link}>
               <CharacterCard
                 name={character.name}
@@ -73,9 +70,11 @@ class CharacterDisplay extends React.Component {
 }
 
 CharacterDisplay.propTypes = {
-  characters: PropTypes.arrayOf(PropTypes.object).isRequired,
-  getCharacters: PropTypes.func.isRequired,
-  filterCharacters: PropTypes.func.isRequired,
+  characters: PropTypes.shape({
+    count: PropTypes.number.isRequired,
+    all: PropTypes.arrayOf(PropTypes.object),
+  }).isRequired,
+  updateCharacters: PropTypes.func.isRequired,
   setFilters: PropTypes.func.isRequired,
   filters: PropTypes.shape({
     page: PropTypes.number.isRequired,
@@ -90,8 +89,7 @@ const mapState = state => ({
 });
 
 const mapDispatch = {
-  getCharacters,
-  filterCharacters,
+  updateCharacters,
   setFilters,
 };
 

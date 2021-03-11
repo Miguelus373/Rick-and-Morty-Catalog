@@ -1,25 +1,22 @@
 import { getCharacter } from 'rickmortyapi';
 
-const getCharacters = page => dispatch => getCharacter({ page })
-  .then(
-    characters => dispatch({
-      type: 'GET_CHARACTERS',
-      payload: characters.results,
-    }),
-  ).catch(() => []);
+const setFilters = filters => ({
+  type: 'SET_FILTERS',
+  payload: filters,
+});
 
-const filterCharacters = ({ page, name, status }) => dispatch => getCharacter({
+const updateCharacters = ({ page, name, status }) => dispatch => getCharacter({
   page,
   name,
   status,
 }).then(
-  characters => {
+  data => {
     dispatch({
-      type: 'FILTER_CHARACTERS',
-      payload: characters.results,
+      type: 'UPDATE_CHARACTERS',
+      payload: { count: data.info.pages, all: data.results },
     });
   },
-).catch(() => []);
+).catch(() => {});
 
 const getSingleCharacter = id => dispatch => getCharacter(id)
   .then(
@@ -31,18 +28,12 @@ const getSingleCharacter = id => dispatch => getCharacter(id)
     },
   ).catch(() => []);
 
-const setFilters = filters => ({
-  type: 'SET_FILTERS',
-  payload: filters,
-});
-
 const useLocalCharacter = character => ({
   type: 'USE_SINGLE_CHARACTER',
   payload: character,
 });
 
 export {
-  getCharacters, filterCharacters,
-  getSingleCharacter, useLocalCharacter,
-  setFilters,
+  updateCharacters, getSingleCharacter,
+  useLocalCharacter, setFilters,
 };

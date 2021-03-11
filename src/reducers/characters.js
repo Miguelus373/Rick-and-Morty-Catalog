@@ -1,10 +1,7 @@
-const characters = (state = [], action) => {
+const characters = (state = { count: 1, all: [] }, action) => {
   switch (action.type) {
-    case 'GET_CHARACTERS':
-      return [...action.payload];
-
-    case 'FILTER_CHARACTERS':
-      return [...action.payload];
+    case 'UPDATE_CHARACTERS':
+      return { ...action.payload };
 
     default:
       return state;

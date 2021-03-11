@@ -9,7 +9,7 @@ const CharacterDetails = () => {
   let { id } = useParams();
   id = parseInt(id, 10);
   const dispatch = useDispatch();
-  const localChr = useSelector(state => state.characters).find(chr => chr.id === id);
+  const localChr = useSelector(state => state.characters.all).find(chr => chr.id === id);
 
   useEffect(() => {
     if (localChr) {
