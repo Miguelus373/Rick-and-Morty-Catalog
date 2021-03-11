@@ -4,7 +4,7 @@
   border: none;
   background-color: transparent;
   position: fixed;
-  top: calc(50% - 2rem)
+  top: calc(50% - 2rem);
 }
 
 .btnNext {
