@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { getCharacter } from 'rickmortyapi';
 import { updateCharacters, setFilters } from '../actions/index';
 import CharacterCard from '../components/CharacterCard';
 import Filter from '../components/Filter';
@@ -13,25 +14,47 @@ class CharacterDisplay extends React.Component {
     super(props);
     this.handlePageChange = this.handlePageChange.bind(this);
     this.handleFilterChange = this.handleFilterChange.bind(this);
+    this.handleApiRequest = this.handleApiRequest.bind(this);
+  }
+
+  componentDidMount() {
+    this.handleApiRequest();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { filters } = this.props;
+
+    if (prevProps.filters !== filters) {
+      this.handleApiRequest();
+    }
+  }
+
+  handleApiRequest() {
+    const { updateCharacters, filters } = this.props;
+
+    getCharacter(filters)
+      .then(data => {
+        updateCharacters({ count: data.info.pages, all: data.results });
+      })
+      .catch(() => { });
   }
 
   handleFilterChange(e) {
-    const { updateCharacters, setFilters, filters } = this.props;
+    const { setFilters } = this.props;
     const newFilters = { [e.target.name]: e.target.value, page: 1 };
 
     setFilters(newFilters);
-    updateCharacters({ ...filters, ...newFilters });
   }
 
   handlePageChange(e) {
     const {
-      updateCharacters, filters, setFilters, filters: { page: current }, characters: { count },
+      setFilters, filters: { page: current }, characters: { count },
     } = this.props;
+
     const page = e.target.alt === 'Next' ? current + 1 : current - 1;
 
     if (page >= 1 && page <= count) {
       setFilters({ page });
-      updateCharacters({ ...filters, page });
     }
   }
 

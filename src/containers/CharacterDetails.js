@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { getSingleCharacter, useLocalCharacter } from '../actions/index';
+import { getCharacter } from 'rickmortyapi';
+import { setCharacter } from '../actions/index';
 import styles from '../assets/details.module.css';
 import Arrow from '../assets/arrow.svg';
 
@@ -13,15 +14,17 @@ const CharacterDetails = () => {
 
   useEffect(() => {
     if (localChr) {
-      dispatch(useLocalCharacter(localChr));
+      dispatch(setCharacter(localChr));
     } else {
-      dispatch(getSingleCharacter(id));
+      getCharacter(id)
+        .then(character => dispatch(setCharacter(character)))
+        .catch(() => []);
     }
   }, []);
 
   const details = useSelector(state => state.details);
 
-  if (details.name) {
+  if (details.id === id) {
     const {
       name, image, status, species, type, location,
     } = details;
