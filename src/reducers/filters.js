@@ -1,4 +1,4 @@
-const filters = (state = { page: 0, name: '', status: '' }, action) => {
+const filters = (state = { page: 1, name: '', status: '' }, action) => {
   switch (action.type) {
     case 'SET_FILTERS':
       return { ...state, ...action.payload };

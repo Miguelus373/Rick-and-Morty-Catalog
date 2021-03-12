@@ -7,7 +7,7 @@ const action = {
 
 describe('filters reducer', () => {
   it('Should return initial state', () => {
-    expect(filters(undefined, {})).toEqual({ page: 0, name: '', status: '' });
+    expect(filters(undefined, {})).toEqual({ page: 1, name: '', status: '' });
   });
 
   it('Should handle "SET_FILTERS" action', () => {
