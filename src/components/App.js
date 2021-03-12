@@ -1,7 +1,7 @@
 import '../assets/App.css';
 import { Switch, Route } from 'react-router-dom';
 import CharacterDisplay from '../containers/CharacterDisplay';
-import CharacterDetails from './CharacterDetails';
+import CharacterDetails from '../containers/CharacterDetails';
 
 function App() {
   return (

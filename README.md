@@ -7,6 +7,8 @@
 ![screenshot](./src/assets/screenshot2.png)
 > This is the details page where you can see the characters info about it's current status, last known location, and species.
 
+---
+
 ## Built With
 
 - Javascript ES6
@@ -19,9 +21,11 @@
 
 ## Live Demo
 
-> Check this app on this [Live demo link](https://rick-and-morty-catalog.herokuapp.com/)
+> Check this app online on its [Live demo](https://rick-and-morty-catalog.herokuapp.com/)
 
 ## How to Install
+
+> You can have a local copy of this project by following these simple steps:
 
 - Install Node in your system. To install Node, you can read the [Documentation](https://nodejs.org/en/download/package-manager/)
 - Clone the repo or download the zip file into your machine. 
@@ -40,6 +44,21 @@
     ``` 
 - This will start a local server that you can access with [This Link](http://localhost:3000/) on your browser
 
+## How to Run Tests
+
+> Most of this project's files have their own tests. Follow these steps to run them:
+
+- First you will need a local copy of this project (folow the [How to Install](##How-to-Install) section).
+
+- Once you have this project and its dependecies, CD into the Rick-and-Morty-Catalog folder and run
+    ``` 
+   npm run test
+    ``` 
+- This will run the tests and show you the results
+
+---
+
+
 ## Author  ![Hireable](https://img.shields.io/badge/HIREABLE-YES-yellowgreen&?style=for-the-badge)
 
 👤 **Miguel Uzcátegui**
@@ -55,6 +74,14 @@ Contributions, issues and feature requests are welcome!. Feel free to check the 
 ## Show your support
 
 Give a ⭐️ if you like this project!
+
+## Acknowledgments
+
+- This is the Catalogue of Recipes Microverse capstone project
+
+- This project uses the [JS Library](https://github.com/afuh/rick-and-morty-api-node) of the [Rick & Morty API](https://rickandmortyapi.com/) for getting the characters info. You can check the API documentation [here](https://rickandmortyapi.com/documentation)
+
+- Design idea by [Marc-Antoine Roy on Behance](https://www.behance.net/enfantroy)
 
 ## 📝 License
 This project is [MIT](https://github.com/Miguelus373/Rick-and-Morty-Catalog/blob/develop/LICENSE) licensed.
