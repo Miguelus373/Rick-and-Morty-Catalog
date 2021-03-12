@@ -12,14 +12,25 @@ describe('Regular action creators', () => {
     expect(actions.setFilters(filters)).toEqual(expectedAction);
   });
 
-  it('should create an action to use a local character', () => {
+  it('should create an action to update characters', () => {
+    const characters = { data: 'many characters' };
+
+    const expectedAction = {
+      type: 'UPDATE_CHARACTERS',
+      payload: characters,
+    };
+
+    expect(actions.updateCharacters(characters)).toEqual(expectedAction);
+  });
+
+  it('should create an action to set a character', () => {
     const character = { data: 'character info' };
 
     const expectedAction = {
-      type: 'USE_SINGLE_CHARACTER',
+      type: 'SET_CHARACTER',
       payload: character,
     };
 
-    expect(actions.useLocalCharacter(character)).toEqual(expectedAction);
+    expect(actions.setCharacter(character)).toEqual(expectedAction);
   });
 });
