@@ -1,0 +1,49 @@
+/* ------ Arrow buttons ------ */
+
+.arrowBtn {
+  border: none;
+  background-color: transparent;
+  position: fixed;
+  top: calc(50% - 2rem);
+}
+
+.btnNext {
+  right: 2rem;
+}
+
+.btnPrev {
+  left: 2rem;
+}
+
+.arrow {
+  width: 4rem;
+}
+
+.next {
+  transform: scaleX(-1);
+}
+
+/* ------ Character Container ------ */
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 80%;
+  margin: 0 auto;
+  justify-content: space-evenly;
+  padding: 2rem;
+}
+
+.link {
+  width: 25%;
+  text-decoration: none;
+  margin: 1rem 0;
+}
+
+.arrowBtn:focus {
+  outline: none;
+}
+
+.arrowBtn:hover {
+  cursor: pointer;
+}
